@@ -1,0 +1,50 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BubbleGit.Runner", "BubbleGit.Runner\BubbleGit.Runner.csproj", "{E53BCDC0-C3AD-4D03-8FD1-8E856BFE7401}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BubleGit.Configurator", "BubleGit.Configurator\BubleGit.Configurator.csproj", "{4ED6E35B-70C3-43E8-8516-ECF7B44D58DA}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "BubbleGit.Setup", "BubbleGit.Setup\BubbleGit.Setup.vdproj", "{69C6CD45-36CD-4D97-A3FF-793C0CE26FED}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{19FEE1D6-F6EB-46BC-A07C-4BE5E276CCC7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BubbleGit.Runner.Tests", "BubbleGit.Runner.Tests\BubbleGit.Runner.Tests.csproj", "{37D72270-5966-45C1-AA0D-4B28BDCB94E6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BubleGit.Configurator.Tests", "BubleGit.Configurator.Tests\BubleGit.Configurator.Tests.csproj", "{2C5E3ABB-4172-4585-BE1D-1F860844DBA2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E53BCDC0-C3AD-4D03-8FD1-8E856BFE7401}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E53BCDC0-C3AD-4D03-8FD1-8E856BFE7401}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E53BCDC0-C3AD-4D03-8FD1-8E856BFE7401}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E53BCDC0-C3AD-4D03-8FD1-8E856BFE7401}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4ED6E35B-70C3-43E8-8516-ECF7B44D58DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4ED6E35B-70C3-43E8-8516-ECF7B44D58DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4ED6E35B-70C3-43E8-8516-ECF7B44D58DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4ED6E35B-70C3-43E8-8516-ECF7B44D58DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{69C6CD45-36CD-4D97-A3FF-793C0CE26FED}.Debug|Any CPU.ActiveCfg = Debug
+		{69C6CD45-36CD-4D97-A3FF-793C0CE26FED}.Release|Any CPU.ActiveCfg = Release
+		{37D72270-5966-45C1-AA0D-4B28BDCB94E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37D72270-5966-45C1-AA0D-4B28BDCB94E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37D72270-5966-45C1-AA0D-4B28BDCB94E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37D72270-5966-45C1-AA0D-4B28BDCB94E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C5E3ABB-4172-4585-BE1D-1F860844DBA2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C5E3ABB-4172-4585-BE1D-1F860844DBA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C5E3ABB-4172-4585-BE1D-1F860844DBA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C5E3ABB-4172-4585-BE1D-1F860844DBA2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{37D72270-5966-45C1-AA0D-4B28BDCB94E6} = {19FEE1D6-F6EB-46BC-A07C-4BE5E276CCC7}
+		{2C5E3ABB-4172-4585-BE1D-1F860844DBA2} = {19FEE1D6-F6EB-46BC-A07C-4BE5E276CCC7}
+	EndGlobalSection
+EndGlobal
