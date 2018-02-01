@@ -46,6 +46,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommitTempMessage.cs" />
+    <Compile Include="IssueTracker\ControllersFactory.cs" />
     <Compile Include="IssueTracker\InsertIssueController.cs" />
     <Compile Include="IssueTracker\InsertIssueView.cs">
       <SubType>Form</SubType>
@@ -53,6 +55,8 @@
     <Compile Include="IssueTracker\InsertIssueView.Designer.cs">
       <DependentUpon>InsertIssueView.cs</DependentUpon>
     </Compile>
+    <Compile Include="InvalidApplicationArgumentException.cs" />
+    <Compile Include="IssueTracker\IssueTrackerApplication.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="IssueTracker\InsertIssueView.resx">
