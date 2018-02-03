@@ -1,4 +1,6 @@
-﻿namespace Runner.IssueTracker
+﻿using Utilities.FileSystem;
+
+namespace Runner.IssueTracker
 {
     public interface IControllersFactory
     {
@@ -10,7 +12,7 @@
         public IInsertIssueController CreateInsertIssueController(string repositoryDirectory)
         {
             return new InsertIssueController(new InsertIssueView(), new CommitTempMessage(repositoryDirectory), 
-                new LastIssue(repositoryDirectory));
+                new LastIssue(repositoryDirectory, new FileUtilities(), new DirectoryUtilities()));
         }
     }
 }
