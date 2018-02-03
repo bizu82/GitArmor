@@ -1,6 +1,6 @@
 ## Overview
 
-Bubble Git is a visual tool that provides the user with a set of advanced features that simplify the daily use of git.<br />
+Git Armor is a visual tool that provides the user with a set of advanced features that simplify the daily use of git.<br />
 
 ### Current Status
 
