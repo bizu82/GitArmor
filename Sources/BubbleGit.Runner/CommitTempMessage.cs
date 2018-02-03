@@ -1,4 +1,5 @@
-﻿using BubbleGit.Runner.IssueTracker;
+﻿using System.IO;
+using BubbleGit.Runner.IssueTracker;
 
 namespace BubbleGit.Runner
 {
@@ -10,21 +11,24 @@ namespace BubbleGit.Runner
 
     public class CommitTempMessage : ICommitTempMessage
     {
-        private readonly string m_repositoryDirectory;
+        private readonly string m_commitMessageFilePath;
 
         public CommitTempMessage(string repositoryDirectory)
         {
-            m_repositoryDirectory = repositoryDirectory;
+            m_commitMessageFilePath = Path.Combine(repositoryDirectory, @".git\COMMITMESSAGE");
         }
 
         public string Read()
         {
-            throw new System.NotImplementedException();
+            return File.ReadAllText(m_commitMessageFilePath);
         }
 
         public void Write(string message)
         {
-            throw new System.NotImplementedException();
+            using (var file = new StreamWriter(m_commitMessageFilePath))
+            {
+                file.WriteLine(message);
+            }
         }
     }
 }
