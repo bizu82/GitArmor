@@ -2,14 +2,15 @@
 {
     public interface IControllersFactory
     {
-        IInsertIssueController CreateInsertIssueController(ICommitTempMessage tempCommitMessage);
+        IInsertIssueController CreateInsertIssueController(string repositoryDirectory);
     }
 
     public class ControllersFactory : IControllersFactory
     {
-        public IInsertIssueController CreateInsertIssueController(ICommitTempMessage tempCommitMessage)
+        public IInsertIssueController CreateInsertIssueController(string repositoryDirectory)
         {
-            return new InsertIssueController(new InsertIssueView(), tempCommitMessage);
+            return new InsertIssueController(new InsertIssueView(), new CommitTempMessage(repositoryDirectory), 
+                new LastIssue(repositoryDirectory));
         }
     }
 }

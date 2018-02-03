@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="CommitTempMessage.cs" />
     <Compile Include="IssueTracker\ControllersFactory.cs" />
+    <Compile Include="IssueTracker\ILastIssue.cs" />
     <Compile Include="IssueTracker\InsertIssueController.cs" />
     <Compile Include="IssueTracker\InsertIssueView.cs">
       <SubType>Form</SubType>

@@ -7,7 +7,11 @@ namespace BubbleGit.Runner.IssueTracker
     {
         private IInsertIssueController m_controller;
 
-        public string IssueText => txtIssue.Text;
+        public string IssueText
+        {
+            get { return txtIssue.Text; }
+            set { txtIssue.Text = value; }
+        }
 
         public InsertIssueView()
         {
@@ -30,6 +34,6 @@ namespace BubbleGit.Runner.IssueTracker
         void SetController(IInsertIssueController controller);
         DialogResult ShowDialog();
         void Close();
-        string IssueText { get; }
+        string IssueText { get; set; }
     }
 }

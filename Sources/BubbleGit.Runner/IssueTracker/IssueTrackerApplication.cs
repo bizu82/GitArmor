@@ -18,7 +18,7 @@ namespace BubbleGit.Runner.IssueTracker
             if (string.IsNullOrEmpty(m_repositoryDirectory?.Trim()))
                 throw new InvalidApplicationArgumentException("Repository Directory");
 
-            m_controllersFactory.CreateInsertIssueController(new CommitTempMessage(m_repositoryDirectory))
+            m_controllersFactory.CreateInsertIssueController(m_repositoryDirectory)
                 .Run();
         }
     }
