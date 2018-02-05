@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace Runner
+namespace Utilities.Git
 {
     public interface ICommitTempMessage
     {

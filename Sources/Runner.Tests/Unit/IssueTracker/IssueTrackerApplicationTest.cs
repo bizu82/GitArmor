@@ -3,6 +3,7 @@ using FakeItEasy;
 using FluentAssertions;
 using NUnit.Framework;
 using Runner.IssueTracker;
+using Utilities.Git;
 
 namespace Runner.Tests.Unit.IssueTracker
 {
@@ -25,6 +26,8 @@ namespace Runner.Tests.Unit.IssueTracker
         }
 
         #endregion
+
+        #region Run
 
         [Test]
         public void Run_WhenNoParametersAreGiven_ShouldThrowInvalidApplicationArgumentException()
@@ -61,5 +64,7 @@ namespace Runner.Tests.Unit.IssueTracker
 
             A.CallTo(() => m_controller.Run()).MustHaveHappened();
         }
+
+        #endregion
     }
 }

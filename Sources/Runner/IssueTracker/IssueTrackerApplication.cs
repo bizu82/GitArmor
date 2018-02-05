@@ -7,7 +7,8 @@ namespace Runner.IssueTracker
         private readonly IControllersFactory m_controllersFactory;
         private readonly string m_repositoryDirectory;
 
-        public IssueTrackerApplication(IReadOnlyList<string> args, IControllersFactory controllersFactory)
+        public IssueTrackerApplication(IReadOnlyList<string> args, 
+            IControllersFactory controllersFactory)
         {
             m_controllersFactory = controllersFactory;
             m_repositoryDirectory = args.Count > 0 ? args[0] : null;

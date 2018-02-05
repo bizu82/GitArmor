@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{00B86DC0-9554-4A15-AE02-9E531F184CB3}</ProjectGuid>
+    <ProjectGuid>{9571D16A-0993-405E-9AD0-80C3045BAFD8}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Utilities</RootNamespace>
-    <AssemblyName>Utilities</AssemblyName>
+    <RootNamespace>Utilities.Tests</RootNamespace>
+    <AssemblyName>Utilities.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,9 +30,21 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FakeItEasy">
+      <HintPath>..\Libs\FakeItEasy\FakeItEasy.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentAssertions">
+      <HintPath>..\Libs\FluentAssertions\FluentAssertions.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentAssertions.Core">
+      <HintPath>..\Libs\FluentAssertions\FluentAssertions.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework, Version=3.4.1.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\NUnit.Framework\nunit.framework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -41,14 +53,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FileSystem\DirectoryUtilities.cs" />
-    <Compile Include="FileSystem\FileUtilities.cs" />
-    <Compile Include="Forms\FormClosingEventArgsWrapper.cs" />
-    <Compile Include="Forms\IView.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Git\CommitTempMessage.cs" />
-    <Compile Include="Git\GitRepository.cs" />
+    <Compile Include="GitRepositoryTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

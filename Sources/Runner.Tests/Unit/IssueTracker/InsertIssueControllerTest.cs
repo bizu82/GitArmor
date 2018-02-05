@@ -4,6 +4,7 @@ using FluentAssertions;
 using NUnit.Framework;
 using Runner.IssueTracker;
 using Utilities.Forms;
+using Utilities.Git;
 
 namespace Runner.Tests.Unit.IssueTracker
 {

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using Utilities.Forms;
+using Utilities.Git;
 
 namespace Runner.IssueTracker
 {

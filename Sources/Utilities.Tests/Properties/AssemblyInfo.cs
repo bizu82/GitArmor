@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("GitArmor.Runner")]
+[assembly: AssemblyTitle("Utilities.Tests")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("GitArmor.Runner")]
+[assembly: AssemblyProduct("Utilities.Tests")]
 [assembly: AssemblyCopyright("Copyright ©  2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("e53bcdc0-c3ad-4d03-8fd1-8e856bfe7401")]
+[assembly: Guid("9571d16a-0993-405e-9ad0-80c3045bafd8")]
 
 // Version information for an assembly consists of the following four values:
 //

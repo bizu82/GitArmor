@@ -56,10 +56,11 @@
             this.ClientSize = new System.Drawing.Size(261, 44);
             this.Controls.Add(this.btnOk);
             this.Controls.Add(this.txtIssue);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "InsertIssueView";
-            this.Text = "Bubble Git - Insert issue";
+            this.Text = "Insert issue";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.InsertIssueView_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
