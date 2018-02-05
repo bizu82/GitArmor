@@ -1,7 +1,9 @@
-﻿using FakeItEasy;
+﻿using System.Windows.Forms;
+using FakeItEasy;
 using FluentAssertions;
 using NUnit.Framework;
 using Runner.IssueTracker;
+using Utilities.Forms;
 
 namespace Runner.Tests.Unit.IssueTracker
 {
@@ -54,6 +56,54 @@ namespace Runner.Tests.Unit.IssueTracker
             A.CallTo(() => m_commitTempMessage.Write("[#1243] - The commit message")).MustHaveHappened();
             A.CallTo(() => m_view.Close()).MustHaveHappened();
             A.CallTo(() => m_lastIssue.Save("1243")).MustHaveHappened();
+        }
+
+        [Test]
+        public void OnClosing_ShouldSkipIfUserDoNotConfirm()
+        {
+            A.CallTo(() => m_view.ShowMessageBox(@"Are you sure you want to commit without an issue number?", @"WARNING",
+                MessageBoxButtons.YesNo)).Returns(DialogResult.No);
+            var e = A.Fake<IFormClosingEventArgs>();
+
+            m_controller.OnClosing(e);
+
+            A.CallTo(() => e.Cancel()).MustHaveHappened();
+        }
+
+        [Test]
+        public void OnClosing_ShouldNotSkipIfUserConfirm()
+        {
+            A.CallTo(() => m_view.ShowMessageBox(@"Are you sure you want to commit without an issue number?", @"WARNING",
+                MessageBoxButtons.YesNo)).Returns(DialogResult.Yes);
+            var e = A.Fake<IFormClosingEventArgs>();
+
+            m_controller.OnClosing(e);
+
+            A.CallTo(() => e.Cancel()).MustNotHaveHappened();
+        }
+
+        [Test]
+        public void OnClosing_WhenIssueIsNotBeInserted_ShouldShowConfirmation()
+        {
+            var e = A.Fake<IFormClosingEventArgs>();
+
+            m_controller.OnClosing(e);
+
+            A.CallTo(() => m_view.ShowMessageBox(@"Are you sure you want to commit without an issue number?",
+                @"WARNING", MessageBoxButtons.YesNo)).MustHaveHappened();
+        }
+
+
+        [Test]
+        public void OnClosing_WhenIssueHasBeenInserted_ShouldNotShowConfirmation()
+        {
+            m_controller.ConfirmSelection();
+            var e = A.Fake<IFormClosingEventArgs>();
+
+            m_controller.OnClosing(e);
+
+            A.CallTo(() => m_view.ShowMessageBox(@"Are you sure you want to commit without an issue number?",
+                @"WARNING", MessageBoxButtons.YesNo)).MustNotHaveHappened();
         }
     }
 }

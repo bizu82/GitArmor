@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using Utilities.Forms;
 
 namespace Runner.IssueTracker
 {
@@ -11,6 +12,11 @@ namespace Runner.IssueTracker
         {
             get { return txtIssue.Text; }
             set { txtIssue.Text = value; }
+        }
+
+        public DialogResult ShowMessageBox(string text, string caption, MessageBoxButtons buttons)
+        {
+            return MessageBox.Show(text, caption, buttons);
         }
 
         public InsertIssueView()
@@ -27,6 +33,11 @@ namespace Runner.IssueTracker
         {
             m_controller.ConfirmSelection();
         }
+
+        private void InsertIssueView_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            m_controller.OnClosing(new FormClosingEventArgsWrapper(e));
+        }
     }
 
     public interface IInsertIssueView
@@ -35,5 +46,6 @@ namespace Runner.IssueTracker
         DialogResult ShowDialog();
         void Close();
         string IssueText { get; set; }
+        DialogResult ShowMessageBox(string text, string caption, MessageBoxButtons buttons);
     }
 }

@@ -60,6 +60,7 @@
             this.MinimizeBox = false;
             this.Name = "InsertIssueView";
             this.Text = "Bubble Git - Insert issue";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.InsertIssueView_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 
