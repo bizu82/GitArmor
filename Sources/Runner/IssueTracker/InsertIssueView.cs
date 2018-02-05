@@ -4,7 +4,7 @@ using Utilities.Forms;
 
 namespace Runner.IssueTracker
 {
-    public partial class InsertIssueView : Form, IInsertIssueView
+    public partial class InsertIssueView : GitArmorForm, IInsertIssueView
     {
         private IInsertIssueController m_controller;
 
@@ -12,11 +12,6 @@ namespace Runner.IssueTracker
         {
             get { return txtIssue.Text; }
             set { txtIssue.Text = value; }
-        }
-
-        public DialogResult ShowMessageBox(string text, string caption, MessageBoxButtons buttons)
-        {
-            return MessageBox.Show(text, caption, buttons);
         }
 
         public InsertIssueView()
@@ -39,13 +34,10 @@ namespace Runner.IssueTracker
             m_controller.OnClosing(new FormClosingEventArgsWrapper(e));
         }
     }
-
-    public interface IInsertIssueView
+    
+    public interface IInsertIssueView : IView
     {
         void SetController(IInsertIssueController controller);
-        DialogResult ShowDialog();
-        void Close();
         string IssueText { get; set; }
-        DialogResult ShowMessageBox(string text, string caption, MessageBoxButtons buttons);
     }
 }

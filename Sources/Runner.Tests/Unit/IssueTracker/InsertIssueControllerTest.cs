@@ -45,6 +45,24 @@ namespace Runner.Tests.Unit.IssueTracker
             A.CallTo(() => m_view.ShowDialog()).MustHaveHappened();
         }
 
+        #region ConfirmSelection
+
+        [TestCase("ABCD")]
+        [TestCase("123C")]
+        [TestCase(".")]
+        [TestCase(",")]
+        public void ConfirmSelection_WhenInsertedIssueIsNotNumeric_ShouldShowMessageAndExit(string issue)
+        {
+            A.CallTo(() => m_view.IssueText).Returns(issue);
+
+            m_controller.ConfirmSelection();
+
+            A.CallTo(() => m_view.ShowMessageBox(@"Invalid issue number")).MustHaveHappened();
+            A.CallTo(() => m_commitTempMessage.Write(null)).WithAnyArguments().MustNotHaveHappened();
+            A.CallTo(() => m_view.Close()).MustNotHaveHappened();
+            A.CallTo(() => m_lastIssue.Save(null)).MustNotHaveHappened();
+        }
+
         [Test]
         public void ConfirmSelection_ShouldOverwriteCommitMessage_SaveLastIssue_AndClose()
         {
@@ -57,6 +75,10 @@ namespace Runner.Tests.Unit.IssueTracker
             A.CallTo(() => m_view.Close()).MustHaveHappened();
             A.CallTo(() => m_lastIssue.Save("1243")).MustHaveHappened();
         }
+
+        #endregion
+
+        #region OnClosing
 
         [Test]
         public void OnClosing_ShouldSkipIfUserDoNotConfirm()
@@ -97,13 +119,16 @@ namespace Runner.Tests.Unit.IssueTracker
         [Test]
         public void OnClosing_WhenIssueHasBeenInserted_ShouldNotShowConfirmation()
         {
-            m_controller.ConfirmSelection();
+            A.CallTo(() => m_view.IssueText).Returns("123");
             var e = A.Fake<IFormClosingEventArgs>();
 
+            m_controller.ConfirmSelection();
             m_controller.OnClosing(e);
 
             A.CallTo(() => m_view.ShowMessageBox(@"Are you sure you want to commit without an issue number?",
                 @"WARNING", MessageBoxButtons.YesNo)).MustNotHaveHappened();
         }
+
+        #endregion
     }
 }

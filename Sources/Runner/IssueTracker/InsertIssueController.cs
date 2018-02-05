@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Windows.Forms;
 using Utilities.Forms;
 
 namespace Runner.IssueTracker
@@ -28,6 +29,13 @@ namespace Runner.IssueTracker
 
         public void ConfirmSelection()
         {
+            int intIssue;
+            if (!int.TryParse(m_view.IssueText, out intIssue))
+            {
+                m_view.ShowMessageBox(@"Invalid issue number");
+                return;
+            }
+
             m_commitTempMessage.Write($"[#{m_view.IssueText}] - {m_commitTempMessage.Read()}");
             m_lastIssue.Save(m_view.IssueText);
             m_issueSelected = true;
