@@ -34,7 +34,10 @@ namespace Configurator
             catch (InvalidRepositoryException)
             {
                 m_view.ShowMessageBox("Selected folder is not a valid git repository");
+                return;
             }
+
+            m_view.ShowRepositoryMask();
         }
     }
 
