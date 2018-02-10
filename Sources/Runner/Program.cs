@@ -14,8 +14,6 @@ namespace Runner
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            //Application.Run(new InsertIssueView());
-            
             new IssueTrackerApplication(args, new ControllersFactory()).Run();
         }
     }

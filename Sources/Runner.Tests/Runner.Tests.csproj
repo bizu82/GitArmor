@@ -61,8 +61,8 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Runner\Runner.csproj">
-      <Project>{E53BCDC0-C3AD-4D03-8FD1-8E856BFE7401}</Project>
-      <Name>BubbleGit.Runner</Name>
+      <Project>{e53bcdc0-c3ad-4d03-8fd1-8e856bfe7401}</Project>
+      <Name>Runner</Name>
     </ProjectReference>
     <ProjectReference Include="..\Utilities\Utilities.csproj">
       <Project>{00B86DC0-9554-4A15-AE02-9E531F184CB3}</Project>
