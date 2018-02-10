@@ -22,7 +22,7 @@ namespace Configurator
         public IRepositoryView ShowRepositoryMask()
         {
             var repositoryView = new RepositoryView {Dock = DockStyle.Fill};
-            Controls.Add(repositoryView);
+            mainPanel.Controls.Add(repositoryView);
             return repositoryView;
         }
 

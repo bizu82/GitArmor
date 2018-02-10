@@ -28,33 +28,65 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("General");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Issue Tracker");
+            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Repository", new System.Windows.Forms.TreeNode[] {
+            treeNode1,
+            treeNode2});
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.tvRepositoryTree = new System.Windows.Forms.TreeView();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
+            this.splitContainer1.Panel1.SuspendLayout();
+            this.splitContainer1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // label1
+            // splitContainer1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(20, 21);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(74, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "The repository";
+            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer1.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer1.Name = "splitContainer1";
+            // 
+            // splitContainer1.Panel1
+            // 
+            this.splitContainer1.Panel1.Controls.Add(this.tvRepositoryTree);
+            this.splitContainer1.Size = new System.Drawing.Size(723, 451);
+            this.splitContainer1.SplitterDistance = 228;
+            this.splitContainer1.TabIndex = 0;
+            // 
+            // tvRepositoryTree
+            // 
+            this.tvRepositoryTree.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tvRepositoryTree.Location = new System.Drawing.Point(0, 0);
+            this.tvRepositoryTree.Name = "tvRepositoryTree";
+            treeNode1.Name = "ndRepositoryGeneral";
+            treeNode1.Text = "General";
+            treeNode2.Name = "ndRepositoryIssueTracker";
+            treeNode2.Text = "Issue Tracker";
+            treeNode3.Name = "ndRepositoryRoot";
+            treeNode3.Text = "Repository";
+            this.tvRepositoryTree.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
+            treeNode3});
+            this.tvRepositoryTree.Size = new System.Drawing.Size(228, 451);
+            this.tvRepositoryTree.TabIndex = 0;
             // 
             // RepositoryView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.Maroon;
-            this.Controls.Add(this.label1);
+            this.BackColor = System.Drawing.SystemColors.Control;
+            this.Controls.Add(this.splitContainer1);
             this.Name = "RepositoryView";
-            this.Size = new System.Drawing.Size(535, 373);
+            this.Size = new System.Drawing.Size(723, 451);
+            this.splitContainer1.Panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
+            this.splitContainer1.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.SplitContainer splitContainer1;
+        private System.Windows.Forms.TreeView tvRepositoryTree;
     }
 }
