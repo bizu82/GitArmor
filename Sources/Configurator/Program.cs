@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using Utilities.Git;
 
 namespace Configurator
 {
@@ -13,7 +14,7 @@ namespace Configurator
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            new MainViewController(new MainView()).Run();
+            new MainViewController(new MainView(), new GitRepositoryFactory()).Run();
         }
     }
 }

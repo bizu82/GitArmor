@@ -26,5 +26,6 @@ namespace Configurator
     public interface IMainView : IView
     {
         void SetController(IMainViewController controller);
+        
     }
 }

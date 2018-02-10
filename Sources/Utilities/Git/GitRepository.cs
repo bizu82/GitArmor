@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,7 +25,26 @@ namespace Utilities.Git
         ICommitTempMessage CommitTempMessage { get; }
     }
 
+    public interface IGitRepositoryFactory
+    {
+        IGitRepository Create(string repositoryFolder);
+    }
+
+    public class GitRepositoryFactory : IGitRepositoryFactory
+    {
+        public IGitRepository Create(string repositoryFolder)
+        {
+            if (!Directory.Exists(Path.Combine(repositoryFolder, ".git")))
+                throw new InvalidRepositoryException(".git directory does not exists");
+
+            return new GitRepository(repositoryFolder);
+        }
+    }
+
     public class InvalidRepositoryException : Exception
     {
+        public InvalidRepositoryException(string message) : base(message)
+        {
+        }
     }
 }
