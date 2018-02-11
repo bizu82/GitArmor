@@ -15,10 +15,16 @@ namespace Configurator.Repository.General
         {
             m_controller = controller;
         }
+
+        public void SetRepositoryStatus(bool initialized)
+        {
+            btnInitRepository.Enabled = !initialized;
+        }
     }
 
     public interface IGeneralView
     {
         void SetController(IGeneralViewController controller);
+        void SetRepositoryStatus(bool initialized);
     }
 }

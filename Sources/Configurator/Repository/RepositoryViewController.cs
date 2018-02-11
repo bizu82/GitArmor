@@ -15,7 +15,7 @@ namespace Configurator.Repository
             m_repository = repository;
             view.SetController(this);
 
-            m_generalController = new GeneralViewController(view.GeneralView);
+            m_generalController = new GeneralViewController(view.GeneralView, repository);
         }
     }
 
