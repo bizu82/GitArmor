@@ -1,4 +1,5 @@
-﻿using FakeItEasy;
+﻿using Configurator.Repository;
+using FakeItEasy;
 using NUnit.Framework;
 using Utilities.Git;
 
@@ -10,6 +11,7 @@ namespace Configurator.Tests.Unit
         private IMainView m_view;
         private MainViewController m_controller;
         private IGitRepositoryFactory m_repositoryFactory;
+        private IConfiguratorControllersFactory m_controllersFactory;
 
         #region Setup And TearDown
 
@@ -17,8 +19,9 @@ namespace Configurator.Tests.Unit
         public void Setup()
         {
             m_view = A.Fake<IMainView>();
+            m_controllersFactory = A.Fake<IConfiguratorControllersFactory>();
             m_repositoryFactory = A.Fake<IGitRepositoryFactory>();
-            m_controller = new MainViewController(m_view, m_repositoryFactory);
+            m_controller = new MainViewController(m_view, m_repositoryFactory, m_controllersFactory);
         }
 
         #endregion
@@ -59,9 +62,11 @@ namespace Configurator.Tests.Unit
         [Test]
         public void OpenRepository_WhenRepositoryIsValid_ShouldOpenIt()
         {
-            var repoFolder = @"C:\TestRepo";
+            const string repoFolder = @"C:\TestRepo";
             A.CallTo(() => m_view.GetFolderFromDialog(A<string>.Ignored, false)).Returns(repoFolder);
-            IGitRepository repository = A.Fake<IGitRepository>();
+            var repository = A.Fake<IGitRepository>();
+            var repositoryView = A.Fake<IRepositoryView>();
+            A.CallTo(() => m_view.ShowRepositoryMask()).Returns(repositoryView);
             A.CallTo(() => m_repositoryFactory.Create(repoFolder)).Returns(repository);
 
             m_controller.OpenRepository();
@@ -69,6 +74,8 @@ namespace Configurator.Tests.Unit
             A.CallTo(() => m_view.GetFolderFromDialog(A<string>.Ignored, false)).MustHaveHappened();
             A.CallTo(() => m_view.ShowRepositoryMask()).MustHaveHappened();
             A.CallTo(() => m_view.ShowMessageBox("Selected folder is not a valid git repository")).MustNotHaveHappened();
+            A.CallTo(() => m_controllersFactory.CreateRepositoryViewController(repositoryView, repository))
+                .MustHaveHappened();
         }
 
         #endregion

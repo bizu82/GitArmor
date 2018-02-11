@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConfiguratorControllersFactory.cs" />
     <Compile Include="MainView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -55,12 +56,20 @@
     <Compile Include="MainViewController.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\General\GeneralView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Repository\General\GeneralView.Designer.cs">
+      <DependentUpon>GeneralView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Repository\General\GeneralViewController.cs" />
     <Compile Include="Repository\RepositoryView.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Repository\RepositoryView.Designer.cs">
       <DependentUpon>RepositoryView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Repository\RepositoryViewController.cs" />
     <EmbeddedResource Include="MainView.resx">
       <DependentUpon>MainView.cs</DependentUpon>
     </EmbeddedResource>
@@ -73,6 +82,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Repository\General\GeneralView.resx">
+      <DependentUpon>GeneralView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Repository\RepositoryView.resx">
       <DependentUpon>RepositoryView.cs</DependentUpon>
     </EmbeddedResource>

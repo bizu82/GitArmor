@@ -14,7 +14,7 @@ namespace Configurator
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            new MainViewController(new MainView(), new GitRepositoryFactory()).Run();
+            new MainViewController(new MainView(), new GitRepositoryFactory(), new ConfiguratorControllersFactory()).Run();
         }
     }
 }

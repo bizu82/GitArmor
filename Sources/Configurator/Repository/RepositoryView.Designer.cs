@@ -68,6 +68,7 @@
             treeNode3});
             this.tvRepositoryTree.Size = new System.Drawing.Size(228, 451);
             this.tvRepositoryTree.TabIndex = 0;
+            this.tvRepositoryTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvRepositoryTree_AfterSelect);
             // 
             // RepositoryView
             // 

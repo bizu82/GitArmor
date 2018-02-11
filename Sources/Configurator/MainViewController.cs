@@ -1,4 +1,4 @@
-﻿using System;
+﻿using Configurator.Repository;
 using Utilities.Git;
 
 namespace Configurator
@@ -7,11 +7,14 @@ namespace Configurator
     {
         private readonly IMainView m_view;
         private readonly IGitRepositoryFactory m_repositoryFactory;
+        private readonly IConfiguratorControllersFactory m_controllersFactory;
 
-        public MainViewController(IMainView view, IGitRepositoryFactory repositoryFactory)
+        public MainViewController(IMainView view, IGitRepositoryFactory repositoryFactory,
+            IConfiguratorControllersFactory controllersFactory)
         {
             m_view = view;
             m_repositoryFactory = repositoryFactory;
+            m_controllersFactory = controllersFactory;
             m_view.SetController(this);
         }
 
@@ -27,9 +30,11 @@ namespace Configurator
             if (repositoryFolder == null)
                 return;
 
+            IGitRepository repository;
+
             try
             {
-                m_repositoryFactory.Create(repositoryFolder);
+                repository = m_repositoryFactory.Create(repositoryFolder);
             }
             catch (InvalidRepositoryException)
             {
@@ -37,7 +42,8 @@ namespace Configurator
                 return;
             }
 
-            m_view.ShowRepositoryMask();
+            var repositoryView = m_view.ShowRepositoryMask();
+            m_controllersFactory.CreateRepositoryViewController(repositoryView, repository);
         }
     }
 
