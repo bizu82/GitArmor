@@ -1,5 +1,5 @@
 ﻿using Configurator.Repository.General;
-using Utilities.Git;
+using Core.Git;
 
 namespace Configurator.Repository
 {

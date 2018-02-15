@@ -58,6 +58,10 @@
       <Project>{4ED6E35B-70C3-43E8-8516-ECF7B44D58DA}</Project>
       <Name>Configurator</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Core\Core.csproj">
+      <Project>{DDD3645D-B5FC-4270-9384-0E7B7C13C122}</Project>
+      <Name>Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Utilities\Utilities.csproj">
       <Project>{00b86dc0-9554-4a15-ae02-9e531f184cb3}</Project>
       <Name>Utilities</Name>

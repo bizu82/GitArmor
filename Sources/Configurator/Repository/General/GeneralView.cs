@@ -20,6 +20,11 @@ namespace Configurator.Repository.General
         {
             btnInitRepository.Enabled = !initialized;
         }
+
+        private void btnInitRepository_Click(object sender, System.EventArgs e)
+        {
+            m_controller.InitializeRepository();
+        }
     }
 
     public interface IGeneralView

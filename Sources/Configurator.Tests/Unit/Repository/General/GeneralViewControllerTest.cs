@@ -1,7 +1,7 @@
 ﻿using Configurator.Repository.General;
+using Core.Git;
 using FakeItEasy;
 using NUnit.Framework;
-using Utilities.Git;
 
 namespace Configurator.Tests.Unit.Repository.General
 {
@@ -30,12 +30,37 @@ namespace Configurator.Tests.Unit.Repository.General
         [TestCase(true)]
         public void ShouldInitViewStatus(bool initialized)
         {
-            A.CallTo(() => m_repository.IsInitialized).Returns(initialized);
+            A.CallTo(() => m_repository.IsArmed).Returns(initialized);
             var view = A.Fake<IGeneralView>();
             var controller = new GeneralViewController(view, m_repository);
 
             A.CallTo(() => view.SetController(controller)).MustHaveHappened();
             A.CallTo(() => view.SetRepositoryStatus(initialized)).MustHaveHappened();
+        }
+
+        #endregion
+
+        #region InitializeRepository
+
+        [Test]
+        public void InitializeRepository_WhenRepositoryIsInitialized_ShouldDoNothing()
+        {
+            A.CallTo(() => m_repository.IsArmed).Returns(true);
+
+            m_controller.InitializeRepository();
+
+            A.CallTo(() => m_repository.Arm()).MustNotHaveHappened();
+        }
+
+        [Test]
+        public void InitializeRepository_WhenRepositoryIsNotInitialized_ShouldInitializeIt()
+        {
+            A.CallTo(() => m_repository.IsArmed).Returns(false);
+
+            m_controller.InitializeRepository();
+
+            A.CallTo(() => m_repository.Arm()).MustHaveHappened();
+            A.CallTo(() => m_view.SetRepositoryStatus(true)).MustHaveHappened();
         }
 
         #endregion

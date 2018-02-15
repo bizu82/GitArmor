@@ -1,7 +1,7 @@
 ﻿using Configurator.Repository;
+using Core.Git;
 using FakeItEasy;
 using NUnit.Framework;
-using Utilities.Git;
 
 namespace Configurator.Tests.Unit
 {

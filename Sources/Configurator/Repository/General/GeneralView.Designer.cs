@@ -39,6 +39,7 @@
             this.btnInitRepository.TabIndex = 0;
             this.btnInitRepository.Text = "Initialize repository";
             this.btnInitRepository.UseVisualStyleBackColor = true;
+            this.btnInitRepository.Click += new System.EventHandler(this.btnInitRepository_Click);
             // 
             // GeneralView
             // 

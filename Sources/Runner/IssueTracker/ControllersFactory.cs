@@ -1,5 +1,5 @@
-﻿using Utilities.FileSystem;
-using Utilities.Git;
+﻿using Core.Git;
+using Utilities.FileSystem;
 
 namespace Runner.IssueTracker
 {

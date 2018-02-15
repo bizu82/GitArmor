@@ -60,6 +60,10 @@
     <Compile Include="Unit\IssueTracker\LastIssueTest.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Core\Core.csproj">
+      <Project>{DDD3645D-B5FC-4270-9384-0E7B7C13C122}</Project>
+      <Name>Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Runner\Runner.csproj">
       <Project>{e53bcdc0-c3ad-4d03-8fd1-8e856bfe7401}</Project>
       <Name>Runner</Name>

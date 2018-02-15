@@ -1,5 +1,4 @@
-﻿using Configurator.Repository;
-using Utilities.Git;
+﻿using Core.Git;
 
 namespace Configurator
 {
