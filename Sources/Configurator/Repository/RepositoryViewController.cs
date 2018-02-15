@@ -1,5 +1,6 @@
 ﻿using Configurator.Repository.General;
 using Core.Git;
+using Core.Logging;
 
 namespace Configurator.Repository
 {
@@ -9,13 +10,13 @@ namespace Configurator.Repository
         private readonly IGitRepository m_repository;
         private IGeneralViewController m_generalController;
 
-        public RepositoryViewController(IRepositoryView view, IGitRepository repository)
+        public RepositoryViewController(IRepositoryView view, IGitRepository repository, ILogger logger)
         {
             m_view = view;
             m_repository = repository;
             view.SetController(this);
 
-            m_generalController = new GeneralViewController(view.GeneralView, repository);
+            m_generalController = new GeneralViewController(view.GeneralView, repository, logger);
         }
     }
 

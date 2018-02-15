@@ -1,5 +1,6 @@
 ﻿using Configurator.Repository;
 using Core.Git;
+using Core.Logging;
 using FakeItEasy;
 using NUnit.Framework;
 
@@ -19,7 +20,7 @@ namespace Configurator.Tests.Unit.Repository
         {
             m_view = A.Fake<IRepositoryView>();
             m_repository = A.Fake<IGitRepository>();
-            m_controller = new RepositoryViewController(m_view, m_repository);
+            m_controller = new RepositoryViewController(m_view, m_repository, A.Fake<ILogger>());
         }
 
         #endregion

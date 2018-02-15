@@ -1,5 +1,6 @@
 ﻿using Configurator.Repository.General;
 using Core.Git;
+using Core.Logging;
 using FakeItEasy;
 using NUnit.Framework;
 
@@ -19,7 +20,7 @@ namespace Configurator.Tests.Unit.Repository.General
         {
             m_view = A.Fake<IGeneralView>();
             m_repository = A.Fake<IGitRepository>();
-            m_controller = new GeneralViewController(m_view, m_repository);
+            m_controller = new GeneralViewController(m_view, m_repository, A.Fake<ILogger>());
         }
 
         #endregion
@@ -32,7 +33,7 @@ namespace Configurator.Tests.Unit.Repository.General
         {
             A.CallTo(() => m_repository.IsArmed).Returns(initialized);
             var view = A.Fake<IGeneralView>();
-            var controller = new GeneralViewController(view, m_repository);
+            var controller = new GeneralViewController(view, m_repository, A.Fake<ILogger>());
 
             A.CallTo(() => view.SetController(controller)).MustHaveHappened();
             A.CallTo(() => view.SetRepositoryStatus(initialized)).MustHaveHappened();

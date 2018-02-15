@@ -28,11 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("General");
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Issue Tracker");
-            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Repository", new System.Windows.Forms.TreeNode[] {
-            treeNode1,
-            treeNode2});
+            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("General");
+            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("Issue Tracker");
+            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("Repository", new System.Windows.Forms.TreeNode[] {
+            treeNode7,
+            treeNode8});
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.tvRepositoryTree = new System.Windows.Forms.TreeView();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -49,6 +49,10 @@
             // splitContainer1.Panel1
             // 
             this.splitContainer1.Panel1.Controls.Add(this.tvRepositoryTree);
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.BackColor = System.Drawing.SystemColors.Control;
             this.splitContainer1.Size = new System.Drawing.Size(723, 451);
             this.splitContainer1.SplitterDistance = 228;
             this.splitContainer1.TabIndex = 0;
@@ -58,14 +62,14 @@
             this.tvRepositoryTree.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tvRepositoryTree.Location = new System.Drawing.Point(0, 0);
             this.tvRepositoryTree.Name = "tvRepositoryTree";
-            treeNode1.Name = "ndRepositoryGeneral";
-            treeNode1.Text = "General";
-            treeNode2.Name = "ndRepositoryIssueTracker";
-            treeNode2.Text = "Issue Tracker";
-            treeNode3.Name = "ndRepositoryRoot";
-            treeNode3.Text = "Repository";
+            treeNode7.Name = "ndRepositoryGeneral";
+            treeNode7.Text = "General";
+            treeNode8.Name = "ndRepositoryIssueTracker";
+            treeNode8.Text = "Issue Tracker";
+            treeNode9.Name = "ndRepositoryRoot";
+            treeNode9.Text = "Repository";
             this.tvRepositoryTree.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode3});
+            treeNode9});
             this.tvRepositoryTree.Size = new System.Drawing.Size(228, 451);
             this.tvRepositoryTree.TabIndex = 0;
             this.tvRepositoryTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvRepositoryTree_AfterSelect);
@@ -74,6 +78,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.Controls.Add(this.splitContainer1);
             this.Name = "RepositoryView";

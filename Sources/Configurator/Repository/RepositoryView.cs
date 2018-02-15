@@ -24,8 +24,11 @@ namespace Configurator.Repository
         {
             splitContainer1.Panel2.Controls.Clear();
 
-            if(e.Node.Name == "ndRepositoryGeneral")
-                splitContainer1.Panel2.Controls.Add(m_generalView);
+            if (e.Node.Name != "ndRepositoryGeneral")
+                return;
+
+            splitContainer1.Panel2.Controls.Add(m_generalView);
+            m_generalView.Dock = DockStyle.Fill;
         }
     }
 

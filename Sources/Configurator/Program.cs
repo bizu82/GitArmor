@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using Core.Git;
+using Core.Logging;
 
 namespace Configurator
 {
@@ -14,7 +15,9 @@ namespace Configurator
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            new MainViewController(new MainView(), new GitRepositoryFactory(), new ConfiguratorControllersFactory()).Run();
+            var logger = new LoggerFactory().CreateForConfigurator();
+            new MainViewController(new MainView(), new GitRepositoryFactory(), 
+                new ConfiguratorControllersFactory(logger), logger).Run();
         }
     }
 }

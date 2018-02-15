@@ -1,5 +1,6 @@
 ﻿using Configurator.Repository;
 using Core.Git;
+using Core.Logging;
 using FakeItEasy;
 using NUnit.Framework;
 
@@ -12,16 +13,18 @@ namespace Configurator.Tests.Unit
         private MainViewController m_controller;
         private IGitRepositoryFactory m_repositoryFactory;
         private IConfiguratorControllersFactory m_controllersFactory;
+        private ILogger m_logger;
 
         #region Setup And TearDown
 
         [SetUp]
         public void Setup()
         {
+            m_logger = A.Fake<ILogger>();
             m_view = A.Fake<IMainView>();
             m_controllersFactory = A.Fake<IConfiguratorControllersFactory>();
             m_repositoryFactory = A.Fake<IGitRepositoryFactory>();
-            m_controller = new MainViewController(m_view, m_repositoryFactory, m_controllersFactory);
+            m_controller = new MainViewController(m_view, m_repositoryFactory, m_controllersFactory, m_logger);
         }
 
         #endregion

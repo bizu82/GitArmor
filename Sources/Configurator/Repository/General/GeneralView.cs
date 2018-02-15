@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System.Drawing;
+using System.Windows.Forms;
 
 namespace Configurator.Repository.General
 {
@@ -19,6 +20,8 @@ namespace Configurator.Repository.General
         public void SetRepositoryStatus(bool initialized)
         {
             btnInitRepository.Enabled = !initialized;
+            lblRepositoryStaus.Text = initialized ? "The repository is armed" : "The repository is not armed";
+            lblRepositoryStaus.BackColor = initialized ? Color.LimeGreen : Color.Tomato;
         }
 
         private void btnInitRepository_Click(object sender, System.EventArgs e)

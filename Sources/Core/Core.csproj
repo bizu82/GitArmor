@@ -47,6 +47,7 @@
     <Compile Include="GitArmorRepositoryConfig.cs" />
     <Compile Include="Git\CommitTempMessage.cs" />
     <Compile Include="Git\GitRepository.cs" />
+    <Compile Include="Logging\Logger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
