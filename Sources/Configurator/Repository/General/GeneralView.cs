@@ -1,9 +1,10 @@
 ﻿using System.Drawing;
 using System.Windows.Forms;
+using Utilities.Forms;
 
 namespace Configurator.Repository.General
 {
-    public partial class GeneralView : UserControl, IGeneralView
+    public partial class GeneralView : UserControlView, IGeneralView
     {
         private IGeneralViewController m_controller;
 
@@ -30,7 +31,7 @@ namespace Configurator.Repository.General
         }
     }
 
-    public interface IGeneralView
+    public interface IGeneralView : IUserControlView
     {
         void SetController(IGeneralViewController controller);
         void SetRepositoryStatus(bool initialized);

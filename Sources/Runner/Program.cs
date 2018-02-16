@@ -12,9 +12,12 @@ namespace Runner
         [STAThread]
         static void Main(string[] args)
         {
+            if (args.Length < 2)
+                return;
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            new IssueTrackerApplication(args, new ControllersFactory()).Run();
+            new IssueTrackerApplication(new []{ args[1] }, new ControllersFactory()).Run();
         }
     }
 }

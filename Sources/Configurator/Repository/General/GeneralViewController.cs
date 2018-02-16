@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows.Forms;
 using Core.Git;
 using Core.Logging;
 
@@ -28,6 +29,11 @@ namespace Configurator.Repository.General
 
                 m_repository.Arm();
                 m_view.SetRepositoryStatus(true);
+            }
+            catch (HooksAlreadyExistsException e)
+            {
+                m_logger.Error(e);
+                m_view.ShowMessageBox("This repository cannot be armed because git hooks are already defined");
             }
             catch (Exception e)
             {

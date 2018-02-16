@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using Utilities;
 using Utilities.FileSystem;
 using Utilities.Serialization;
 
@@ -11,6 +12,7 @@ namespace Core.Git
         private readonly IFileUtilities m_files;
         private readonly IJsonSerializer m_serializer;
         private readonly IDirectoryUtilities m_dirs;
+        private readonly IApplication m_application;
 
         public ICommitTempMessage CommitTempMessage { get; }
 
@@ -21,6 +23,11 @@ namespace Core.Git
         {
             if (IsArmed)
                 return;
+            
+            var preComitHookPath = Path.Combine(m_repositoryFolder, @".git\hooks\pre-commit");
+
+            if(m_files.Exists(preComitHookPath))
+                throw new HooksAlreadyExistsException();
 
             if (!m_dirs.Exists(Path.Combine(m_repositoryFolder, @".git\gitarmor")))
                 m_dirs.CreateDirectory(Path.Combine(m_repositoryFolder, @".git\gitarmor"));
@@ -30,17 +37,22 @@ namespace Core.Git
             {
                 fw.WriteLine(jsonConfig);
             }
+
+            var preCommitHookSourcePath = Path.Combine(m_application.GetApplicationDirectory(), @"Hooks\pre-commit");
+            m_files.Copy(preCommitHookSourcePath, preComitHookPath);
         }
 
         public GitRepository(string repositoryFolder, 
             IFileUtilities files, 
             IJsonSerializer serializer,
-            IDirectoryUtilities dirs)
+            IDirectoryUtilities dirs,
+            IApplication application)
         {
             m_repositoryFolder = repositoryFolder;
             m_files = files;
             m_serializer = serializer;
             m_dirs = dirs;
+            m_application = application;
             CommitTempMessage = new CommitTempMessage(repositoryFolder);
         }
     }
@@ -64,13 +76,21 @@ namespace Core.Git
             if (!Directory.Exists(Path.Combine(repositoryFolder, ".git")))
                 throw new InvalidRepositoryException(".git directory does not exists");
 
-            return new GitRepository(repositoryFolder, new FileUtilities(), new JsonSerializer(), new DirectoryUtilities());
+            return new GitRepository(repositoryFolder, new FileUtilities(), new JsonSerializer(), 
+                new DirectoryUtilities(), new Application());
         }
     }
 
     public class InvalidRepositoryException : Exception
     {
         public InvalidRepositoryException(string message) : base(message)
+        {
+        }
+    }
+
+    public class HooksAlreadyExistsException : Exception
+    {
+        public HooksAlreadyExistsException() : base()
         {
         }
     }

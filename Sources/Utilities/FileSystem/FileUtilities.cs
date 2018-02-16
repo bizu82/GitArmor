@@ -23,6 +23,11 @@ namespace Utilities.FileSystem
         {
             return File.OpenText(path);
         }
+
+        public void Copy(string sourceFileName, string destFileName, bool overwrite = false)
+        {
+            File.Copy(sourceFileName, destFileName, overwrite);
+        }
     }
 
     public interface IFileUtilities
@@ -31,5 +36,6 @@ namespace Utilities.FileSystem
         void Delete(string path);
         TextWriter CreateText(string path);
         TextReader OpenText(string path);
+        void Copy(string sourceFileName, string destFileName, bool overwrite = false);
     }
 }
