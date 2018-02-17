@@ -33,7 +33,7 @@ namespace Runner.Tests.Unit.IssueTracker
         {
             var app = new IssueTrackerApplication(new List<string>(), m_controllersFactory);
 
-            app.Invoking(a => a.Run()).ShouldThrow<InvalidApplicationArgumentException>()
+            app.Invoking(a => a.Run()).Should().Throw<InvalidApplicationArgumentException>()
                 .Where(e => e.Message == "Repository Directory");
 
             A.CallTo(() => m_controllersFactory.CreateInsertIssueController(null))
@@ -47,7 +47,7 @@ namespace Runner.Tests.Unit.IssueTracker
         {
             var app = new IssueTrackerApplication(new List<string> { repositoryDirectoryParameter }, m_controllersFactory);
 
-            app.Invoking(a => a.Run()).ShouldThrow<InvalidApplicationArgumentException>()
+            app.Invoking(a => a.Run()).Should().Throw<InvalidApplicationArgumentException>()
                 .Where(e => e.Message == "Repository Directory");
 
             A.CallTo(() => m_controllersFactory.CreateInsertIssueController(null))

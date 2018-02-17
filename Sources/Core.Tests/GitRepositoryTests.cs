@@ -60,7 +60,7 @@ namespace Core.Tests
             A.CallTo(() => m_serializer.Serialize(A<GitArmorRepositoryConfig>.Ignored)).Returns(json);
             A.CallTo(() => m_fs.Exists(preCommitHookPath)).Returns(true);
 
-            m_repository.Invoking(r => r.Arm()).ShouldThrow<HooksAlreadyExistsException>();
+            m_repository.Invoking(r => r.Arm()).Should().Throw<HooksAlreadyExistsException>();
         }
 
 
