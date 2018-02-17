@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Windows.Forms;
 using Core.Git;
 using Core.Logging;
 
@@ -38,7 +37,7 @@ namespace Configurator.Repository.General
             catch (Exception e)
             {
                 m_logger.Error(e);
-                throw;
+                m_view.ShowMessageBox("An error has occurred arming repository");
             }
         }
     }

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainView));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.startToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openRepositoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -75,9 +76,10 @@
             this.ClientSize = new System.Drawing.Size(776, 511);
             this.Controls.Add(this.mainPanel);
             this.Controls.Add(this.menuStrip1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainView";
-            this.Text = "Git Armor - Configurator";
+            this.Text = "Git Armor";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
