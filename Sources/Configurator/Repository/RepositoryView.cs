@@ -1,5 +1,6 @@
 ﻿using System.Windows.Forms;
 using Configurator.Repository.General;
+using Configurator.Repository.IssueTracker;
 
 namespace Configurator.Repository
 {
@@ -7,8 +8,10 @@ namespace Configurator.Repository
     {
         private IRepositoryViewController m_controller;
         private readonly GeneralView m_generalView = new GeneralView();
+        private readonly IssueTrackerConfigView m_issueTrackerConfigView = new IssueTrackerConfigView();
         
         public IGeneralView GeneralView => m_generalView;
+        public IIssueTrackerConfigView IssueTrackerView => m_issueTrackerConfigView;
 
         public RepositoryView()
         {
@@ -24,11 +27,23 @@ namespace Configurator.Repository
         {
             splitContainer1.Panel2.Controls.Clear();
 
-            if (e.Node.Name != "ndRepositoryGeneral")
+            UserControl controlToShow = null;
+
+            switch (e.Node.Name)
+            {
+                case "ndRepositoryGeneral":
+                    controlToShow = m_generalView;
+                    break;
+                case "ndRepositoryIssueTracker":
+                    controlToShow = m_issueTrackerConfigView;
+                    break;
+            }
+
+            if (controlToShow == null)
                 return;
 
-            splitContainer1.Panel2.Controls.Add(m_generalView);
-            m_generalView.Dock = DockStyle.Fill;
+            splitContainer1.Panel2.Controls.Add(controlToShow);
+            controlToShow.Dock = DockStyle.Fill;
         }
     }
 
@@ -36,5 +51,6 @@ namespace Configurator.Repository
     {
         void SetController(IRepositoryViewController controller);
         IGeneralView GeneralView { get; }
+        IIssueTrackerConfigView IssueTrackerView { get; }
     }
 }

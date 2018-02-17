@@ -66,6 +66,13 @@
       <DependentUpon>GeneralView.cs</DependentUpon>
     </Compile>
     <Compile Include="Repository\General\GeneralViewController.cs" />
+    <Compile Include="Repository\IssueTracker\IssueTrackerConfigController.cs" />
+    <Compile Include="Repository\IssueTracker\IssueTrackerConfigView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Repository\IssueTracker\IssueTrackerConfigView.Designer.cs">
+      <DependentUpon>IssueTrackerConfigView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Repository\RepositoryView.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -87,6 +94,9 @@
     </Compile>
     <EmbeddedResource Include="Repository\General\GeneralView.resx">
       <DependentUpon>GeneralView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Repository\IssueTracker\IssueTrackerConfigView.resx">
+      <DependentUpon>IssueTrackerConfigView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Repository\RepositoryView.resx">
       <DependentUpon>RepositoryView.cs</DependentUpon>
