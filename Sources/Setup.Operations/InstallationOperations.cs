@@ -1,32 +1,31 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
 using System.ComponentModel;
-using System.IO;
+using Core.Logging;
 
 namespace Setup.Operations
 {
     [RunInstaller(true)]
     public partial class InstallationOperations : System.Configuration.Install.Installer
     {
+        private readonly ILogger m_logger;
+
         public InstallationOperations()
         {
             InitializeComponent();
+            m_logger = new LoggerFactory().CreateForSetup();
         }
 
         [System.Security.Permissions.SecurityPermission(System.Security.Permissions.SecurityAction.Demand)]
         public override void Install(IDictionary stateSaver)
         {
-            base.Install(stateSaver);
-            RegisterAppPathIntoEnvVar();
-        }
+            m_logger.Info("Starting install operations...");
 
-        private void RegisterAppPathIntoEnvVar()
-        {
-            var currentPath = Environment.GetEnvironmentVariable("PATH");
-            var appDir = $@"{Context.Parameters["targetdir"]}";
-            var target = EnvironmentVariableTarget.Machine;
-            System.Environment.SetEnvironmentVariable("PATH", $"{currentPath};{appDir}", target);
+            base.Install(stateSaver);
+            var appFolder = Context.Parameters["targetdir"].TrimEnd(new char[] { '\\' });
+            new EnvVarsOperations().AddFolderToPath(appFolder);
+            m_logger.Info($"App folder {appFolder} registered into path");
+
+            m_logger.Info("Install operations completed");
         }
 
         [System.Security.Permissions.SecurityPermission(System.Security.Permissions.SecurityAction.Demand)]

@@ -16,6 +16,11 @@ namespace Core.Logging
         {
             return new Logger(Path.Combine(m_appData, @"GitArmor\Logs\Configurator.log"));
         }
+
+        public ILogger CreateForSetup()
+        {
+            return new Logger(Path.Combine(m_appData, @"GitArmor\Logs\Setup.log"));
+        }
     }
 
     public interface ILoggerFactory
