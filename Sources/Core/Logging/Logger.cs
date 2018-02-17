@@ -3,7 +3,7 @@ using System.IO;
 
 namespace Core.Logging
 {
-    public class LoggerFactory : ILoggerFactory
+    public class LoggerFactory
     {
         private readonly string m_appData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
 
@@ -21,12 +21,6 @@ namespace Core.Logging
         {
             return new Logger(Path.Combine(m_appData, @"GitArmor\Logs\Setup.log"));
         }
-    }
-
-    public interface ILoggerFactory
-    {
-        ILogger CreateForRunner();
-        ILogger CreateForConfigurator();
     }
 
     internal class Logger : ILogger
@@ -62,7 +56,10 @@ namespace Core.Logging
         {
             try
             {
-                using (var tw = File.CreateText(m_path))
+                if (!Directory.Exists(Path.GetDirectoryName(m_path)))
+                    Directory.CreateDirectory(Path.GetDirectoryName(m_path));
+
+                using (var tw = File.AppendText(m_path))
                 {
                     tw.WriteLine($"{DateTime.Now:G} - [{level}] - {message}");
                 }
