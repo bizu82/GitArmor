@@ -115,6 +115,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Core.Tests\Core.Tests.csproj">
+      <Project>{20B49DC0-3BD7-49DE-B604-7562A952AD08}</Project>
+      <Name>Core.Tests</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Core\Core.csproj">
       <Project>{DDD3645D-B5FC-4270-9384-0E7B7C13C122}</Project>
       <Name>Core</Name>

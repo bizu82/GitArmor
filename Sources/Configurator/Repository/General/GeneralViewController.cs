@@ -1,6 +1,8 @@
 ﻿using System;
+using Core;
 using Core.Git;
 using Core.Logging;
+using Core.Tests;
 
 namespace Configurator.Repository.General
 {
@@ -16,7 +18,6 @@ namespace Configurator.Repository.General
             m_repository = repository;
             m_logger = logger;
             m_view.SetController(this);
-            m_view.SetRepositoryStatus(repository.IsArmed);
         }
 
         public void InitializeRepository()
@@ -40,9 +41,14 @@ namespace Configurator.Repository.General
                 m_view.ShowMessageBox("An error has occurred arming repository");
             }
         }
+
+        public void OnShow()
+        {
+            m_view.SetRepositoryStatus(m_repository.IsArmed);
+        }
     }
 
-    public interface IGeneralViewController
+    public interface IGeneralViewController : IUserControlController
     {
         void InitializeRepository();
     }

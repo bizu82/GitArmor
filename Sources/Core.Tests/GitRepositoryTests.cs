@@ -5,7 +5,6 @@ using FluentAssertions;
 using NUnit.Framework;
 using Utilities;
 using Utilities.FileSystem;
-using Utilities.Serialization;
 
 namespace Core.Tests
 {
@@ -15,20 +14,18 @@ namespace Core.Tests
         private string m_repositoryFolder = @"C:\Repo";
         private IFileUtilities m_fs;
         private GitRepository m_repository;
-        private IJsonSerializer m_serializer;
-        private IDirectoryUtilities m_dirUtils;
         private IApplication m_app;
+        private IGitArmorRepositoryConfigFactory m_repoConfigFactory;
 
         #region Setup And TearDown
 
         [SetUp]
         public void Setup()
         {
+            m_repoConfigFactory = A.Fake<IGitArmorRepositoryConfigFactory>();
             m_fs = A.Fake<IFileUtilities>();
             m_app = A.Fake<IApplication>();
-            m_dirUtils = A.Fake<IDirectoryUtilities>();
-            m_serializer = A.Fake<IJsonSerializer>();
-            m_repository = new GitRepository(m_repositoryFolder, m_fs, m_serializer, m_dirUtils, m_app);
+            m_repository = new GitRepository(m_repositoryFolder, m_fs, m_app, m_repoConfigFactory);
         }
 
         #endregion
@@ -43,7 +40,7 @@ namespace Core.Tests
 
             m_repository.Arm();
 
-            A.CallTo(() => m_serializer.Serialize(A<GitArmorRepositoryConfig>.Ignored))
+            A.CallTo(() => m_repoConfigFactory.LoadOrCreate(A<string>.Ignored))
                 .MustNotHaveHappened();
         }
 
@@ -53,11 +50,6 @@ namespace Core.Tests
             var configPath = Path.Combine(m_repositoryFolder, @".git\gitarmor\config");
             var preCommitHookPath = Path.Combine(m_repositoryFolder, @".git\hooks\pre-commit");
             A.CallTo(() => m_fs.Exists(configPath)).Returns(false);
-            A.CallTo(() => m_dirUtils.Exists(Path.Combine(m_repositoryFolder, @".git\gitarmor"))).Returns(false);
-            var tw = A.Fake<TextWriter>();
-            A.CallTo(() => m_fs.CreateText(configPath)).Returns(tw);
-            var json = "the serialized object";
-            A.CallTo(() => m_serializer.Serialize(A<GitArmorRepositoryConfig>.Ignored)).Returns(json);
             A.CallTo(() => m_fs.Exists(preCommitHookPath)).Returns(true);
 
             m_repository.Invoking(r => r.Arm()).Should().Throw<HooksAlreadyExistsException>();
@@ -70,21 +62,12 @@ namespace Core.Tests
             var configPath = Path.Combine(m_repositoryFolder, @".git\gitarmor\config");
             var preCommitHookPath = Path.Combine(m_repositoryFolder, @".git\hooks\pre-commit");
             A.CallTo(() => m_fs.Exists(configPath)).Returns(false);
-            A.CallTo(() => m_dirUtils.Exists(Path.Combine(m_repositoryFolder, @".git\gitarmor"))).Returns(false);
-            var tw = A.Fake<TextWriter>();
-            A.CallTo(() => m_fs.CreateText(configPath)).Returns(tw);
-            var json = "the serialized object";
-            A.CallTo(() => m_serializer.Serialize(A<GitArmorRepositoryConfig>.Ignored)).Returns(json);
             A.CallTo(() => m_fs.Exists(preCommitHookPath)).Returns(false);
             A.CallTo(() => m_app.GetApplicationDirectory()).Returns(@"C:\AppPath");
 
             m_repository.Arm();
 
-            A.CallTo(() => m_dirUtils.CreateDirectory(Path.Combine(m_repositoryFolder, @".git\gitarmor")))
-                .MustHaveHappened();
-            A.CallTo(() => m_serializer.Serialize(A<GitArmorRepositoryConfig>.Ignored)).MustHaveHappened();
-            A.CallTo(() => m_fs.CreateText(configPath)).MustHaveHappened();
-            A.CallTo(() => tw.WriteLine(json)).MustHaveHappened();
+            A.CallTo(() => m_repoConfigFactory.LoadOrCreate(m_repositoryFolder)).MustHaveHappened();
             A.CallTo(() => m_fs.Copy(@"C:\AppPath\Hooks\pre-commit", preCommitHookPath, false)).MustHaveHappened();
         }
 

@@ -36,7 +36,21 @@ namespace Configurator.Tests.Unit.Repository.General
             var controller = new GeneralViewController(view, m_repository, A.Fake<ILogger>());
 
             A.CallTo(() => view.SetController(controller)).MustHaveHappened();
-            A.CallTo(() => view.SetRepositoryStatus(initialized)).MustHaveHappened();
+        }
+
+        #endregion
+
+        #region OnShow
+
+        [TestCase(false)]
+        [TestCase(true)]
+        public void OnShow_ShouldInitViewStatus(bool initialized)
+        {
+            A.CallTo(() => m_repository.IsArmed).Returns(initialized);
+
+            m_controller.OnShow();
+            
+            A.CallTo(() => m_view.SetRepositoryStatus(initialized)).MustHaveHappened();
         }
 
         #endregion

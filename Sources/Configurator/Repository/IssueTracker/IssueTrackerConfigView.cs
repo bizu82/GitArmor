@@ -15,10 +15,16 @@ namespace Configurator.Repository.IssueTracker
         {
             m_controller = controller;
         }
+
+        public void SetEnable(bool enable)
+        {
+            Enabled = enable;
+        }
     }
 
     public interface IIssueTrackerConfigView : IUserControlView
     {
         void SetController(IIssueTrackerConfigController controller);
+        void SetEnable(bool b);
     }
 }

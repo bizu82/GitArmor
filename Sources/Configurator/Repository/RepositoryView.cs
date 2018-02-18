@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System.Net.NetworkInformation;
+using System.Windows.Forms;
 using Configurator.Repository.General;
 using Configurator.Repository.IssueTracker;
 
@@ -28,13 +29,15 @@ namespace Configurator.Repository
             splitContainer1.Panel2.Controls.Clear();
 
             UserControl controlToShow = null;
-
+            NodeType nodeType = NodeType.Unknown;
             switch (e.Node.Name)
             {
                 case "ndRepositoryGeneral":
+                    nodeType = NodeType.General;
                     controlToShow = m_generalView;
                     break;
                 case "ndRepositoryIssueTracker":
+                    nodeType = NodeType.IssueTracker;
                     controlToShow = m_issueTrackerConfigView;
                     break;
             }
@@ -42,9 +45,18 @@ namespace Configurator.Repository
             if (controlToShow == null)
                 return;
 
+            
             splitContainer1.Panel2.Controls.Add(controlToShow);
             controlToShow.Dock = DockStyle.Fill;
+            m_controller.OnNodeChanged(nodeType);
         }
+    }
+
+    public enum NodeType
+    {
+        General,
+        IssueTracker,
+        Unknown
     }
 
     public interface IRepositoryView

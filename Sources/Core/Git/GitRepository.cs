@@ -10,9 +10,8 @@ namespace Core.Git
     {
         private readonly string m_repositoryFolder;
         private readonly IFileUtilities m_files;
-        private readonly IJsonSerializer m_serializer;
-        private readonly IDirectoryUtilities m_dirs;
         private readonly IApplication m_application;
+        private readonly IGitArmorRepositoryConfigFactory m_repoConfigFactory;
 
         public ICommitTempMessage CommitTempMessage { get; }
 
@@ -29,30 +28,21 @@ namespace Core.Git
             if(m_files.Exists(preComitHookPath))
                 throw new HooksAlreadyExistsException();
 
-            if (!m_dirs.Exists(Path.Combine(m_repositoryFolder, @".git\gitarmor")))
-                m_dirs.CreateDirectory(Path.Combine(m_repositoryFolder, @".git\gitarmor"));
-
-            var jsonConfig = m_serializer.Serialize(new GitArmorRepositoryConfig());
-            using (var fw = m_files.CreateText(Path.Combine(m_repositoryFolder, @".git\gitarmor\config")))
-            {
-                fw.WriteLine(jsonConfig);
-            }
+            m_repoConfigFactory.LoadOrCreate(m_repositoryFolder);
 
             var preCommitHookSourcePath = Path.Combine(m_application.GetApplicationDirectory(), @"Hooks\pre-commit");
             m_files.Copy(preCommitHookSourcePath, preComitHookPath);
         }
 
         public GitRepository(string repositoryFolder, 
-            IFileUtilities files, 
-            IJsonSerializer serializer,
-            IDirectoryUtilities dirs,
-            IApplication application)
+            IFileUtilities files,
+            IApplication application,
+            IGitArmorRepositoryConfigFactory repoConfigFactory)
         {
             m_repositoryFolder = repositoryFolder;
             m_files = files;
-            m_serializer = serializer;
-            m_dirs = dirs;
             m_application = application;
+            m_repoConfigFactory = repoConfigFactory;
             CommitTempMessage = new CommitTempMessage(repositoryFolder);
         }
     }
@@ -76,8 +66,9 @@ namespace Core.Git
             if (!Directory.Exists(Path.Combine(repositoryFolder, ".git")))
                 throw new InvalidRepositoryException(".git directory does not exists");
 
-            return new GitRepository(repositoryFolder, new FileUtilities(), new JsonSerializer(), 
-                new DirectoryUtilities(), new Application());
+            var fileUtils = new FileUtilities();
+            return new GitRepository(repositoryFolder, fileUtils, new Application(), 
+                new GitArmorRepositoryConfigFactory(new JsonSerializer(), fileUtils, new DirectoryUtilities()));
         }
     }
 
